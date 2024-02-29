@@ -193,6 +193,6 @@ SPECTACULAR_SETTINGS = {
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000",
     "https://bighearts.onrender.com",
-    "http://velyki-sertsia.pp.ua",
+    "https://velyki-sertsia.pp.ua",
     "http://localhost:3000",
 ]

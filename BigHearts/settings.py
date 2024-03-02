@@ -167,6 +167,7 @@ DJOSER = {
     "LOGIN_FIELD": "email",
     "SEND_ACTIVATION_EMAIL": True,
     "SEND_CONFIRMATION_EMAIL": True,
+    "PASSWORD_RESET_CONFIRM_URL": "avtoryzatsiia/{uid}/{token}",
     "ACTIVATION_URL": "aktyvatsiia/{uid}/{token}",
 }
 

@@ -1,6 +1,7 @@
 asgiref==3.7.2
 attrs==23.2.0
 black==24.2.0
+Brotli==1.1.0
 certifi==2024.2.2
 cffi==1.16.0
 charset-normalizer==3.3.2
@@ -49,3 +50,4 @@ tzdata==2024.1
 uritemplate==4.1.1
 urllib3==2.2.1
 uvicorn==0.27.1
+whitenoise==6.6.0

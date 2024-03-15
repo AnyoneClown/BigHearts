@@ -1,7 +1,5 @@
 from django.contrib import admin
 
-from cabinet.models import Post, Delivery, Service
+from cabinet.models import Post
 
 admin.site.register(Post)
-admin.site.register(Delivery)
-admin.site.register(Service)

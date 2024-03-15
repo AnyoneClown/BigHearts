@@ -1,21 +1,13 @@
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from cabinet.models import Delivery, Post, Service
-
-
-class ServiceSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Service
-        fields = "__all__"
-
-
-class DeliverySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Delivery
-        fields = "__all__"
+from cabinet.models import Post
 
 
 class PostSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(queryset=get_user_model().objects.all(), default=serializers.CurrentUserDefault())
+    status = serializers.CharField(default="New")
+
     class Meta:
         model = Post
-        fields = "__all__"
+        fields = ['user', 'type', 'title', 'category', 'text', 'image', 'phone_number', 'telegram', 'location', 'status', 'services', 'delivery']

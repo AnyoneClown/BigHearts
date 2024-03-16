@@ -1,10 +1,10 @@
-from rest_framework import routers
+from django.urls import path
 
-from cabinet.views import PostViewSet
+from cabinet.views import PostView
 
-router = routers.DefaultRouter()
-router.register("posts", PostViewSet)
-
-urlpatterns = router.urls
+urlpatterns = [
+    path("posts/", PostView.as_view(), name="post-create"),
+    path("posts/<int:pk>/", PostView.as_view(), name="post-detail"),
+]
 
 app_name = "cabinet"

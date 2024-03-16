@@ -38,6 +38,7 @@ class Post(models.Model):
     status = models.CharField(max_length=20, choices=StatusChoices.choices)
     services = ArrayField(models.CharField(max_length=50), null=True, default=list)
     delivery = ArrayField(models.CharField(max_length=50), null=True, default=list)
+    person = models.CharField(max_length=100)
 
     class Meta:
         ordering = ["user"]
@@ -45,6 +46,10 @@ class Post(models.Model):
         verbose_name_plural = "Posts"
         app_label = "cabinet"
         db_table = "posts"
+
+    @property
+    def url(self):
+        return f"/{slugify(self.type)}/{slugify(self.category)}/{slugify(self.title)}-{self.id}"
 
     def __str__(self):
         return self.title

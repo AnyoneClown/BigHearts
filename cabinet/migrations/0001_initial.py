@@ -64,9 +64,7 @@ class Migration(migrations.Migration):
                 ("text", models.TextField()),
                 (
                     "image",
-                    models.ImageField(
-                        null=True, upload_to=cabinet.models.image_file_path
-                    ),
+                    models.ImageField(null=True, upload_to=cabinet.models.image_file_path),
                 ),
                 ("link", models.URLField(blank=True, null=True)),
                 (

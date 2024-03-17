@@ -10,7 +10,7 @@ from django.utils.text import slugify
 
 def image_file_path(instance, filename):
     _, extension = os.path.splitext(filename)
-    filename = f"{instance.type}/{instance.category}/{slugify(instance.title)}-{uuid.uuid4()}{extension}"
+    filename = f"{slugify(instance)}-{uuid.uuid4()}{extension}"
     return os.path.join("uploads/posts/", filename)
 
 

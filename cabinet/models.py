@@ -25,7 +25,8 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     category = models.CharField(max_length=100)
     text = models.TextField()
-    image = models.ImageField(upload_to=image_file_path, null=True)
+    image = models.ImageField(null=True)
+    image_link = models.URLField(null=True)
     link = models.CharField(max_length=255, null=True)
 
     phone_regex = RegexValidator(
@@ -40,6 +41,7 @@ class Post(models.Model):
     services = ArrayField(models.CharField(max_length=50), null=True, default=list)
     delivery = ArrayField(models.CharField(max_length=50), null=True, default=list)
     person = models.CharField(max_length=100)
+    email = models.EmailField(null=True)
 
     class Meta:
         ordering = ["user"]

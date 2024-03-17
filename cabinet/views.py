@@ -1,9 +1,10 @@
+import requests
 from rest_framework import generics
 from rest_framework.parsers import MultiPartParser, JSONParser
 from rest_framework.permissions import IsAuthenticated
 
 from cabinet.models import Post
-from cabinet.serializers import PostSerializer
+from cabinet.serializers import PostSerializer, PostListSerializer
 
 
 class PostView(generics.CreateAPIView, generics.RetrieveUpdateAPIView):
@@ -14,3 +15,8 @@ class PostView(generics.CreateAPIView, generics.RetrieveUpdateAPIView):
 
     def perform_update(self, serializer):
         serializer.save(status="New")
+
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return PostListSerializer
+        return self.serializer_class

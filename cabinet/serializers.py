@@ -10,7 +10,7 @@ class PostSerializer(serializers.ModelSerializer):
         queryset=get_user_model().objects.all(), default=serializers.CurrentUserDefault()
     )
     status = serializers.CharField(default="New")
-    image = serializers.ImageField()
+    image = serializers.ImageField(allow_null=True)
 
     class Meta:
         model = Post

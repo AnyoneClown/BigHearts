@@ -10,7 +10,7 @@ class PostSerializer(serializers.ModelSerializer):
         queryset=get_user_model().objects.all(), default=serializers.CurrentUserDefault()
     )
     status = serializers.CharField(default="New")
-    image = serializers.ImageField(allow_null=True, required=False)
+    image_file = serializers.ImageField(allow_null=True, required=False, write_only=True)
 
     class Meta:
         model = Post
@@ -30,19 +30,19 @@ class PostSerializer(serializers.ModelSerializer):
             "delivery",
             "person",
             "link",
-            "image_link",
             "email",
+            "image_file"
         ]
 
     def create(self, validated_data):
-        image_file = self.context["request"].FILES.get("image")
+        image_file = validated_data.pop("image_file", None)
         if image_file:
             imgbb_api_url = "https://api.imgbb.com/1/upload?key=9239b8d19c1953b12e55807bf850c584"
             response = requests.post(imgbb_api_url, files={"image": image_file})
             if response.status_code == 200:
                 image_data = response.json()["data"]
                 image_url = image_data["url"]
-                validated_data["image_link"] = image_url
+                validated_data["image"] = image_url
         return super().create(validated_data)
 
 
@@ -57,7 +57,6 @@ class PostListSerializer(serializers.ModelSerializer):
             "title",
             "category",
             "text",
-            "image_link",
             "phone_number",
             "telegram",
             "location",
@@ -66,7 +65,7 @@ class PostListSerializer(serializers.ModelSerializer):
             "delivery",
             "person",
             "link",
-            "image_link",
+            "image",
             "email",
             "url",
         ]

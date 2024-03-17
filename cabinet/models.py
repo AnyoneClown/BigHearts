@@ -25,8 +25,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     category = models.CharField(max_length=100)
     text = models.TextField()
-    image = models.ImageField(null=True)
-    image_link = models.URLField(null=True)
+    image = models.URLField(null=True)
     link = models.CharField(max_length=255, null=True)
 
     phone_regex = RegexValidator(
@@ -38,8 +37,8 @@ class Post(models.Model):
     telegram = models.CharField(max_length=100, blank=True, null=True)
     location = models.CharField(max_length=255, blank=True, null=True)
     status = models.CharField(max_length=20, choices=StatusChoices.choices)
-    services = ArrayField(models.CharField(max_length=50), null=True, default=list)
-    delivery = ArrayField(models.CharField(max_length=50), null=True, default=list)
+    services = models.CharField(max_length=50, null=True)
+    delivery = models.CharField(max_length=50, null=True)
     person = models.CharField(max_length=100)
     email = models.EmailField(null=True)
 

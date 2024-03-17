@@ -14,6 +14,7 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = [
+            "id",
             "user",
             "type",
             "title",
@@ -27,6 +28,7 @@ class PostSerializer(serializers.ModelSerializer):
             "services",
             "delivery",
             "person",
+            "link",
             "url"
         ]
 

@@ -25,7 +25,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include("djoser.urls")),
     path("api/users/", include("djoser.urls.jwt")),
-    path("api/cabinet/", include("cabinet.urls"), name="cabinet"),
+    path("api/", include("cabinet.urls"), name="cabinet"),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path("api/schema/swagger/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

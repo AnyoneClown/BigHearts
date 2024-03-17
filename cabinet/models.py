@@ -26,6 +26,7 @@ class Post(models.Model):
     category = models.CharField(max_length=100)
     text = models.TextField()
     image = models.ImageField(upload_to=image_file_path, null=True)
+    link = models.CharField(max_length=255, null=True)
 
     phone_regex = RegexValidator(
         regex=r"^\+?1?\d{9,15}$",

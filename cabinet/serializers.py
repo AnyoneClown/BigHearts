@@ -31,7 +31,8 @@ class PostSerializer(serializers.ModelSerializer):
             "person",
             "link",
             "email",
-            "image_file"
+            "image_file",
+            "url"
         ]
 
     def create(self, validated_data):

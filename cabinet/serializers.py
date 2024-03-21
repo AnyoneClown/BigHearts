@@ -32,7 +32,7 @@ class PostSerializer(serializers.ModelSerializer):
             "link",
             "email",
             "image_file",
-            "url"
+            "url",
         ]
 
     def create(self, validated_data):
@@ -73,3 +73,20 @@ class PostListSerializer(serializers.ModelSerializer):
 
     def get_url(self, obj):
         return obj.url
+
+
+class AdminSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ["id", "type", "category", "title", "text", "image", "link", "person", "location"]
+
+
+class UserPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = "__all__"
+
+
+class FilterPostsSerializer(serializers.Serializer):
+    type = serializers.CharField()
+    category = serializers.CharField(required=False, allow_null=True)

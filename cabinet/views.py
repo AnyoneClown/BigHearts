@@ -21,7 +21,10 @@ class PostView(generics.CreateAPIView, generics.RetrieveUpdateAPIView):
     parser_classes = [MultiPartParser, JSONParser]
 
     def perform_update(self, serializer):
-        serializer.save(status="New")
+        if "status" not in serializer.validated_data:
+            serializer.save(status="New")
+        else:
+            serializer.save(status=serializer.validated_data["status"])
 
     def partial_update(self, request, *args, **kwargs):
         instance = self.get_object()

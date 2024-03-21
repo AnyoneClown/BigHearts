@@ -53,6 +53,7 @@ class PostListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = [
+            "id",
             "user",
             "type",
             "title",
@@ -80,11 +81,6 @@ class AdminSerializer(serializers.ModelSerializer):
         model = Post
         fields = ["id", "type", "category", "title", "text", "image", "link", "person", "location"]
 
-
-class UserPostSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Post
-        fields = "__all__"
 
 
 class FilterPostsSerializer(serializers.Serializer):

@@ -9,7 +9,6 @@ from cabinet.serializers import (
     PostSerializer,
     PostListSerializer,
     AdminSerializer,
-    UserPostSerializer,
     FilterPostsSerializer,
 )
 
@@ -40,7 +39,7 @@ class PostView(generics.CreateAPIView, generics.RetrieveUpdateAPIView):
 
 
 class UserPost(generics.ListAPIView):
-    serializer_class = UserPostSerializer
+    serializer_class = PostListSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):

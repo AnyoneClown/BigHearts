@@ -13,7 +13,7 @@ from cabinet.serializers import (
 )
 
 
-class PostView(generics.CreateAPIView, generics.RetrieveUpdateAPIView):
+class PostView(generics.CreateAPIView, generics.RetrieveDestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [IsAuthenticated]

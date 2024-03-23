@@ -2,10 +2,10 @@ import os
 import uuid
 
 from django.contrib.auth import get_user_model
-from django.contrib.postgres.fields import ArrayField
 from django.core.validators import RegexValidator
 from django.db import models
 from django.utils.text import slugify
+from transliterate import translit
 
 
 def image_file_path(instance, filename):
@@ -51,7 +51,8 @@ class Post(models.Model):
 
     @property
     def url(self):
-        return f"/{slugify(self.type)}/{slugify(self.category)}/{slugify(self.title)}-{self.id}"
+        transliterated_title = translit(self.title, 'uk', reversed=True)
+        return f"/{slugify(self.type)}/{slugify(self.category)}/{slugify(transliterated_title)}-{self.id}"
 
     def __str__(self):
         return self.title

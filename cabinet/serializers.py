@@ -11,6 +11,7 @@ class PostSerializer(serializers.ModelSerializer):
     )
     status = serializers.CharField(default="New")
     image_file = serializers.ImageField(allow_null=True, required=False, write_only=True)
+    phone = serializers.CharField(source="phone_number")
 
     class Meta:
         model = Post
@@ -22,7 +23,7 @@ class PostSerializer(serializers.ModelSerializer):
             "category",
             "text",
             "image",
-            "phone_number",
+            "phone",
             "telegram",
             "location",
             "status",
@@ -63,6 +64,7 @@ class PostSerializer(serializers.ModelSerializer):
 
 class PostListSerializer(serializers.ModelSerializer):
     url = serializers.SerializerMethodField(read_only=True)
+    phone = serializers.CharField(source="phone_number")
 
     class Meta:
         model = Post
@@ -73,7 +75,7 @@ class PostListSerializer(serializers.ModelSerializer):
             "title",
             "category",
             "text",
-            "phone_number",
+            "phone",
             "telegram",
             "location",
             "status",

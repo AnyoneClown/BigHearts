@@ -109,6 +109,10 @@ class GetPostByUrl(APIView):
         try:
             post_id = int(url.split("-")[-1])
             post = Post.objects.get(id=post_id)
+
+            if post.url != url:
+                return Response({"error": "Post not found"}, status=status.HTTP_404_NOT_FOUND)
+
             response_data = {
                 "url": post.url,
                 "postType": post.type,

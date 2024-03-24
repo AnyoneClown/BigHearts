@@ -1,3 +1,4 @@
+from django.db.models import Q
 from rest_framework import generics, status
 from rest_framework.parsers import MultiPartParser, JSONParser
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
@@ -75,3 +76,25 @@ class FilterPosts(APIView):
                 for post in posts
             ]
             return Response(data, status=status.HTTP_200_OK)
+
+
+class SearchPosts(APIView):
+    def post(self, request):
+        data = request.data
+        search_query = data.get('search')
+
+        search_results = Post.objects.filter(
+            Q(title__icontains=search_query) | Q(text__icontains=search_query),
+            status=Post.StatusChoices.ACTIVE
+        )
+
+        response_data = []
+        for post in search_results:
+            response_data.append({
+                'title': post.title,
+                'image': post.image,
+                'location': post.location,
+                'url': post.url,
+            })
+
+        return Response(response_data, status=status.HTTP_200_OK)

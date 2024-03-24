@@ -41,9 +41,10 @@ class Post(models.Model):
     delivery = models.CharField(max_length=50, null=True)
     person = models.CharField(max_length=100)
     email = models.EmailField(null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ["user"]
+        ordering = ["created_at"]
         verbose_name = "Post"
         verbose_name_plural = "Posts"
         app_label = "cabinet"

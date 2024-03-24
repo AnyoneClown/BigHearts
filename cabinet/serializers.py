@@ -96,7 +96,6 @@ class AdminSerializer(serializers.ModelSerializer):
         fields = ["id", "type", "category", "title", "text", "image", "link", "person", "location"]
 
 
-
 class FilterPostsSerializer(serializers.Serializer):
     type = serializers.CharField()
     category = serializers.CharField(required=False, allow_null=True)

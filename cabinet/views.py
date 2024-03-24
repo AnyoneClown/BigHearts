@@ -81,20 +81,50 @@ class FilterPosts(APIView):
 class SearchPosts(APIView):
     def post(self, request):
         data = request.data
-        search_query = data.get('search')
+        search_query = data.get("search")
 
         search_results = Post.objects.filter(
-            Q(title__icontains=search_query) | Q(text__icontains=search_query),
-            status=Post.StatusChoices.ACTIVE
+            Q(title__icontains=search_query) | Q(text__icontains=search_query), status=Post.StatusChoices.ACTIVE
         )
 
         response_data = []
         for post in search_results:
-            response_data.append({
-                'title': post.title,
-                'image': post.image,
-                'location': post.location,
-                'url': post.url,
-            })
+            response_data.append(
+                {
+                    "title": post.title,
+                    "image": post.image,
+                    "location": post.location,
+                    "url": post.url,
+                }
+            )
 
         return Response(response_data, status=status.HTTP_200_OK)
+
+
+class GetPostByUrl(APIView):
+    def post(self, request):
+        data = request.data
+        url = data.get("url")
+
+        try:
+            post_id = int(url.split("-")[-1])
+            post = Post.objects.get(id=post_id)
+            response_data = {
+                "url": post.url,
+                "postType": post.type,
+                "title": post.title,
+                "category": post.category,
+                "text": post.text,
+                "image": post.image,
+                "link": post.link,
+                "delivery": post.delivery,
+                "services": post.services,
+                "phone": post.phone_number,
+                "email": post.email,
+                "telegram": post.telegram,
+                "person": post.person,
+                "location": post.location,
+            }
+            return Response(response_data, status=status.HTTP_200_OK)
+        except (Post.DoesNotExist, ValueError, IndexError):
+            return Response({"error": "Post not found"}, status=status.HTTP_404_NOT_FOUND)

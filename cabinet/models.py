@@ -52,7 +52,7 @@ class Post(models.Model):
 
     @property
     def url(self):
-        transliterated_title = translit(self.title, 'uk', reversed=True)
+        transliterated_title = translit(self.title, "uk", reversed=True)
         return f"/{slugify(self.type)}/{slugify(self.category)}/{slugify(transliterated_title)}-{self.id}"
 
     def __str__(self):

@@ -59,7 +59,7 @@ class PostSerializer(serializers.ModelSerializer):
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
         instance.save()
-        return instance
+        return super().update(instance, validated_data)
 
 
 class PostListSerializer(serializers.ModelSerializer):
